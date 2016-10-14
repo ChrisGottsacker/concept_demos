@@ -1,0 +1,12 @@
+this
+is
+a
+file
+now
+but
+each
+line
+will
+become
+a
+row

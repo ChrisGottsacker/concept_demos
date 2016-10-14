@@ -1,10 +1,15 @@
-IF OBJECT_ID('Test.dbo.markers','U') IS NOT NULL
-	DROP TABLE [Test].[dbo].[markers];
+/* Copied from ClearLogic's answer at http://stackoverflow.com/a/12504496/5149671
+ * 
+ * 
+ */
 
-CREATE TABLE [Test].[dbo].[markers]
+IF OBJECT_ID('tempTable','U') IS NOT NULL
+	DROP TABLE [tempTable];
+
+CREATE TABLE [tempTable]
     (
     [rsID] varchar(500)
     )
 
-    BULK INSERT [Test].[dbo].[markers] FROM 'E:\rqtl_pipeline\test\markers.txt'
-    WITH (FORMATFILE = 'E:\cgottsacker\mssms\FILEFORMAT.XML')
+    BULK INSERT [tempTable] FROM 'E:\path\to\file.txt'
+    WITH (FORMATFILE = 'E:\path\to\FILE_FORMAT.xml')
