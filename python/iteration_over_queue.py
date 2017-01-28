@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 from queue import Queue
 class Buffer(object):
 	'''Store pkts until their turn to be processed'''
@@ -48,3 +47,6 @@ q.enqueue(3)
 
 for num in q:
 	print(num)
+
+if 1 in q:
+	print('hooray')
