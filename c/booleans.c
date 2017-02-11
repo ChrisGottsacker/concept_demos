@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+typedef char bool;
 #define TRUE 1
 #define FALSE 0
 

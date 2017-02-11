@@ -4,7 +4,12 @@ import java.util.*;
 
 class template{
 	public static void main(String[] args){
+		int num;
+		a(num);
+		
+	}
 
-		System.out.println("test.ha".split("\\.")[0]);
+	public static void a(int b){
+		return;
 	}
 }
