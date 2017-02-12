@@ -3,22 +3,24 @@
 #include <string.h>
 #include <errno.h>
 
-#define ARRAYLIST_TYPE int
 typedef struct arraylist{
 	size_t numItems;
 	size_t maxNumItems;
-	ARRAYLIST_TYPE* items;
+	void** items;
 } ARRAYLIST;
 
-void appendToArraylist(ARRAYLIST* listptr, ARRAYLIST_TYPE item);
+
+void appendToArraylist(ARRAYLIST* listptr, void* item);
 ARRAYLIST* newArraylist();
 ARRAYLIST* resizeArraylist(ARRAYLIST* listptr);
 void deleteArraylist(ARRAYLIST* listptr);
 
 int main(){
-	// printf("%lu = 2*%lu + %lu\n", sizeof(a), sizeof(size_t), sizeof(ARRAYLIST_TYPE*));
+	// printf("%lu = 2*%lu + %lu\n", sizeof(a), sizeof(size_t), sizeof(void**));
 	ARRAYLIST* numsptr = newArraylist();
-	appendToArraylist(numsptr, 27);
+	int foo = 27;
+	appendToArraylist(numsptr, &foo);
+	printf("%d == %d?\n", foo, *((int*)numsptr->items[0]));
 	deleteArraylist(numsptr);
 }
 
@@ -37,7 +39,7 @@ ARRAYLIST* newArraylist(){
 
 	// allocate space for array
 	errno = 0;
-	listptr->items = malloc(listptr->maxNumItems*sizeof(ARRAYLIST_TYPE));
+	listptr->items = malloc(listptr->maxNumItems*sizeof(void*));
 	if(errno != 0){
 		fprintf(stderr, "%s\n", strerror(errno));
 		exit(EXIT_FAILURE);
@@ -45,12 +47,11 @@ ARRAYLIST* newArraylist(){
 	return listptr;
 }
 
-void appendToArraylist(ARRAYLIST* listptr, ARRAYLIST_TYPE item){
+void appendToArraylist(ARRAYLIST* listptr, void* item){
 	if(listptr->numItems == listptr->maxNumItems){
 		resizeArraylist(listptr);
 	}
 
-	// add line to array
 	listptr->items[listptr->numItems] = item;
 	listptr->numItems++;
 }
@@ -63,7 +64,7 @@ void deleteArraylist(ARRAYLIST* listptr){
 ARRAYLIST* resizeArraylist(ARRAYLIST* listptr){
 	errno = 0;
 	listptr->maxNumItems *= 2;
-	ARRAYLIST_TYPE * tmp = realloc(listptr->items, listptr->maxNumItems * sizeof(ARRAYLIST_TYPE));
+	void* * tmp = realloc(listptr->items, listptr->maxNumItems * sizeof(void*));
 	if(errno != 0){
 		fprintf(stderr, "%s\n", strerror(errno));
 		exit(EXIT_FAILURE);
@@ -71,4 +72,5 @@ ARRAYLIST* resizeArraylist(ARRAYLIST* listptr){
 	else{
 		listptr->items = tmp;
 	}
+	return listptr;
 }
