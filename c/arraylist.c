@@ -13,7 +13,7 @@ typedef struct arraylist{
 void appendToArraylist(ARRAYLIST* listptr, void* item);
 ARRAYLIST* newArraylist();
 ARRAYLIST* resizeArraylist(ARRAYLIST* listptr);
-void deleteArraylist(ARRAYLIST* listptr);
+void freeArraylist(ARRAYLIST* listptr);
 
 int main(){
 	// printf("%lu = 2*%lu + %lu\n", sizeof(a), sizeof(size_t), sizeof(void**));
@@ -21,7 +21,7 @@ int main(){
 	int foo = 27;
 	appendToArraylist(numsptr, &foo);
 	printf("%d == %d?\n", foo, *((int*)numsptr->items[0]));
-	deleteArraylist(numsptr);
+	freeArraylist(numsptr);
 }
 
 ARRAYLIST* newArraylist(){
@@ -56,7 +56,7 @@ void appendToArraylist(ARRAYLIST* listptr, void* item){
 	listptr->numItems++;
 }
 
-void deleteArraylist(ARRAYLIST* listptr){
+void freeArraylist(ARRAYLIST* listptr){
 	free(listptr->items);
 	free(listptr);
 }
@@ -64,7 +64,7 @@ void deleteArraylist(ARRAYLIST* listptr){
 ARRAYLIST* resizeArraylist(ARRAYLIST* listptr){
 	errno = 0;
 	listptr->maxNumItems *= 2;
-	void* * tmp = realloc(listptr->items, listptr->maxNumItems * sizeof(void*));
+	void** tmp = realloc(listptr->items, listptr->maxNumItems * sizeof(void*));
 	if(errno != 0){
 		fprintf(stderr, "%s\n", strerror(errno));
 		exit(EXIT_FAILURE);

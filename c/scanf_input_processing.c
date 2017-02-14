@@ -6,12 +6,9 @@
 
 int main(){
 	char* nextWord = NULL;
-	char newline = NULL;
 	int numCharsRead;
 
 	while(1){
-		nextWord = "";
-
 		errno = 0;
 		numCharsRead = fscanf(stdin, "%ms", &nextWord);
 		if(errno != 0){
