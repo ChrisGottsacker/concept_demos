@@ -11,4 +11,3 @@ if [ $str == "Hello" ]; then
 	echo $str World!
 else
 	echo "Fine, don't say 'Hello' to me"
-fi

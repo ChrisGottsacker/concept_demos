@@ -1,0 +1,5 @@
+Averaging values and then taking the average of those averages...
+((a + b)/2 + (d + e)/2 + (f + g)/2) / 3
+= (a + b)/6 + (d + e)/6 + (f + g)/6
+= (a + b + d + e + f + g)/6
+...is equivalent to directly averaging all the values

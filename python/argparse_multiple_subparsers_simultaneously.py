@@ -1,6 +1,5 @@
 import argparse
 
-
 parser = argparse.ArgumentParser()
 subparsers = parser.add_subparsers(dest='subparser_name')
 parser.add_argument('-eat', eaction='store_true')
