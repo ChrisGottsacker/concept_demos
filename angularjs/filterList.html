@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en-US" ng-app="simpleApp">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body>
+	<div ng-controller="SimpleController">
+		<p>Name : <input type="text" ng-model="queryName"></p>
+		<ul>
+			<li ng-repeat="member in crew | filter:queryName">{{ member }}</li>
+		</ul>
+	</div>
+
+	<script>
+		var simpleApp = angular.module('simpleApp', []);
+		simpleApp.controller('SimpleController', function($scope) {
+				$scope.crew = ['Alex','Amos','Holden','Naomi'];
+				console.log(angular.toJson($scope.crew));
+		});
+	</script>
+</body>
+</html>

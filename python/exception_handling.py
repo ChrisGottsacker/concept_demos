@@ -2,13 +2,18 @@ import sys
 
 def openFile(filename):
 	try:
-		open(filename)
+		f = open(filename)
 	except IOError:
-		print('Caught exception while trying to open "{}"'.format(filename))
+		raise Exception('Caught exception while trying to open "{}"'.format(filename))
 	else:
-		print('Opened "{}" successfully'.format(filename))
+		print('First word of {}: "{}"'.format(filename, f.readline().split()[0]))
 	finally:
-		print('Done\n')
+		pass
 
-openFile('this_file_doesnt_exist')
-openFile(sys.argv[0])
+try:
+	openFile('this_file_doesnt_exist')
+except Exception as e:
+	print(e)
+
+try:
+	openFile(sys.argv[0])
